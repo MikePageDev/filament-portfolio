@@ -4,6 +4,7 @@ namespace MikePageDev\FilamentPortfolio\Tests\Fixtures;
 
 use Filament\Panel;
 use Filament\PanelProvider;
+use MikePageDev\FilamentPortfolio\FilamentPortfolioPlugin;
 
 class TestPanelProvider extends PanelProvider
 {
@@ -13,6 +14,7 @@ class TestPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login();
+            ->login()
+            ->plugin(FilamentPortfolioPlugin::make());
     }
 }
