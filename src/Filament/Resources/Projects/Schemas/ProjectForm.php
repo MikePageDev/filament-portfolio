@@ -41,7 +41,7 @@ class ProjectForm
                 ]),
                 Section::make('Case study')->schema([
                     Textarea::make('problem')->label('The problem')->rows(4),
-                    Textarea::make('role')->label('My role')->rows(3),
+                    Textarea::make('role')->label('Role')->rows(3),
                     Repeater::make('case_study')
                         ->label('Sections')
                         ->schema([
