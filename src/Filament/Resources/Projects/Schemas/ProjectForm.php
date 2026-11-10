@@ -63,9 +63,10 @@ class ProjectForm
                         ->schema([
                             FileUpload::make('path')
                                 ->label('Image')
-                                ->image()
+                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/avif', 'image/gif'])
                                 ->required()
                                 ->maxSize(5120)
+                                ->helperText('JPEG, PNG, WebP, AVIF or GIF, up to 5 MB.')
                                 ->disk(config()->string('filament-portfolio.disk'))
                                 ->directory(config()->string('filament-portfolio.directory'))
                                 ->visibility('public'),

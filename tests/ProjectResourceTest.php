@@ -140,6 +140,27 @@ class ProjectResourceTest extends TestCase
         $undoRepeaterFake();
     }
 
+    public function test_svg_screenshots_are_rejected(): void
+    {
+        $undoRepeaterFake = Repeater::fake();
+
+        $svg = UploadedFile::fake()->createWithContent(
+            'evil.svg',
+            '<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script></svg>',
+        );
+
+        Livewire::test(CreateProject::class)
+            ->fillForm($this->validData([
+                'images' => [['path' => [$svg], 'alt' => 'Evil']],
+            ]))
+            ->call('create')
+            ->assertHasFormErrors(['images.0.path']);
+
+        $undoRepeaterFake();
+
+        $this->assertSame(0, Project::query()->count());
+    }
+
     public function test_editing_without_changing_the_slug_saves(): void
     {
         $project = Project::factory()->create(['slug' => 'demo-app', 'title' => 'Demo App']);
